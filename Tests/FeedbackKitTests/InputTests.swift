@@ -1,5 +1,5 @@
 //
-//  XCTestManifests.swift
+//  InputTests.swift
 //  FeedbackKitTests
 //
 //  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
@@ -24,14 +24,23 @@
 //
 
 import XCTest
+@testable import FeedbackKit
 
-#if !os(macOS)
-public func allTests() -> [XCTestCaseEntry] {
-    return [
-        testCase(BagTests.allTests),
-        testCase(DisposableTests.allTests),
-        testCase(OutputPinTests.allTests),
-        testCase(InputTests.allTests)
+final class InputTests: XCTestCase {
+
+    func testTrigger() {
+        var receivedInputValue: String? = nil
+
+        let input = Input<String>.init { input in receivedInputValue = input }
+
+        // Trigger input
+        input.trigger("input")
+
+        // Assert
+        XCTAssertEqual(receivedInputValue, "input")
+    }
+
+    static let allTests = [
+        ("testTrigger", testTrigger)
     ]
 }
-#endif
