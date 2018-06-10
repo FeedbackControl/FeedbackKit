@@ -28,7 +28,8 @@ import XCTest
 #if !os(macOS)
 public func allTests() -> [XCTestCaseEntry] {
     return [
-        testCase(BagTests.allTests)
+        testCase(BagTests.allTests),
+        testCase(DisposableTests.allTests)
     ]
 }
 #endif

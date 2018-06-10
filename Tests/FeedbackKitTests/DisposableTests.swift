@@ -1,0 +1,91 @@
+//
+//  DisposableTests.swift
+//  FeedbackKitTests
+//
+//  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
+
+import XCTest
+@testable import FeedbackKit
+
+final class DisposableTests: XCTestCase {
+
+    func testIsDisposed() {
+        let disposable = Disposable(disposeAction: {})
+
+        // Dispose
+        disposable.dispose()
+
+        // Assert
+        XCTAssertTrue(disposable.isDisposed)
+    }
+
+    func testDisposeActionCalled() {
+        var disposeActionCalled = false
+
+        let disposable = Disposable { disposeActionCalled = true }
+
+        // Dispose
+        disposable.dispose()
+
+        // Assert
+        XCTAssertTrue(disposeActionCalled)
+    }
+
+    func testDisposableArrayAppend() {
+        let disposable = Disposable(disposeAction: {})
+
+        var disposables: [Disposable] = []
+
+        // Append
+        disposables += disposable
+
+        // Assert
+        XCTAssertEqual(disposables.count, 1)
+    }
+
+    func testDisposableArrayDispose() {
+        var disposeAction1Called = false
+        var disposeAction2Called = false
+
+        let disposable1 = Disposable { disposeAction1Called = true }
+        let disposable2 = Disposable { disposeAction2Called = true }
+
+        var disposables: [Disposable] = []
+
+        // Append
+        disposables += disposable1
+        disposables += disposable2
+        // Dispose
+        disposables.dispose()
+
+        // Assert
+        XCTAssertTrue(disposeAction1Called)
+        XCTAssertTrue(disposeAction2Called)
+    }
+
+    static let allTests = [
+        ("testIsDisposed", testIsDisposed),
+        ("testDisposeActionCalled", testDisposeActionCalled),
+        ("testDisposableArrayAppend", testDisposableArrayAppend),
+        ("testDisposableArrayDispose", testDisposableArrayDispose)
+    ]
+}
