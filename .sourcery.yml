@@ -1,0 +1,6 @@
+sources:
+  - Sources
+  - Tests
+templates:
+  - Stencils
+output: Tests/FeedbackKitTests/Sourcery

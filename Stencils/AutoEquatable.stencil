@@ -1,0 +1,14 @@
+@testable import FeedbackKit
+
+{% for type in types.enums where type.implements.AutoEquatable or type|annotated:"AutoEquatable" %}
+extension {{ type.name }}: Equatable {}
+public func =={{ type.annotations.genericTypeDeclare }}(lhs: {{ type.name }}{{ type.annotations.genericType }}, rhs: {{ type.name }}{{ type.annotations.genericType }}) -> Bool {
+    switch (lhs, rhs) {
+    {% for case in type.cases %}
+    {% if case.hasAssociatedValue %}case (.{{ case.name }}(_), .{{ case.name }}(_)):{% else %}case (.{{ case.name }}, .{{ case.name }}):{% endif %}
+        return true
+    {% endfor %}
+    {% if type.cases.count > 1 %}default: return false{% endif %}
+    }
+}
+{% endfor %}
