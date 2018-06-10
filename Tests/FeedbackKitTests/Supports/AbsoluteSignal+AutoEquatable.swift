@@ -1,5 +1,5 @@
 //
-//  XCTestManifests.swift
+//  AbsoluteSignal+AutoEquatable.swift
 //  FeedbackKitTests
 //
 //  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
@@ -23,12 +23,9 @@
 //  THE SOFTWARE.
 //
 
-import XCTest
+import Foundation
+@testable import FeedbackKit
 
-#if !os(macOS)
-public func allTests() -> [XCTestCaseEntry] {
-    return [
-        testCase(BagTests.allTests)
-    ]
-}
-#endif
+// sourcery: genericTypeDeclare = "<T>"
+// sourcery: genericType = "<T>"
+extension AbsoluteSignal: AutoEquatable {}

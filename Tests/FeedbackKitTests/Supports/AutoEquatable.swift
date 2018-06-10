@@ -1,5 +1,5 @@
 //
-//  XCTestManifests.swift
+//  AutoEquatable.swift
 //  FeedbackKitTests
 //
 //  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
@@ -23,12 +23,7 @@
 //  THE SOFTWARE.
 //
 
-import XCTest
+import Foundation
 
-#if !os(macOS)
-public func allTests() -> [XCTestCaseEntry] {
-    return [
-        testCase(BagTests.allTests)
-    ]
-}
-#endif
+/// Sourcery AutoEquatable.
+protocol AutoEquatable {}
