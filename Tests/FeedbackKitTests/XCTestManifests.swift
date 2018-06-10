@@ -29,7 +29,8 @@ import XCTest
 public func allTests() -> [XCTestCaseEntry] {
     return [
         testCase(BagTests.allTests),
-        testCase(DisposableTests.allTests)
+        testCase(DisposableTests.allTests),
+        testCase(OutputPinTests.allTests),
     ]
 }
 #endif

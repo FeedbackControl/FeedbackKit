@@ -29,4 +29,5 @@ import FeedbackKitTests
 var tests = [XCTestCaseEntry]()
 tests += BagTests.allTests()
 tests += DisposableTests.allTests()
+tests += OutputPinTests.allTests()
 XCTMain(tests)
