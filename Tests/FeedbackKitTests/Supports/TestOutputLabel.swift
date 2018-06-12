@@ -1,5 +1,5 @@
 //
-//  XCTestManifests.swift
+//  TestOutputLabel.swift
 //  FeedbackKitTests
 //
 //  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
@@ -23,16 +23,9 @@
 //  THE SOFTWARE.
 //
 
-import XCTest
+import Foundation
+@testable import FeedbackKit
 
-#if !os(macOS)
-public func allTests() -> [XCTestCaseEntry] {
-    return [
-        testCase(BagTests.allTests),
-        testCase(DisposableTests.allTests),
-        testCase(OutputPinTests.allTests),
-        testCase(InputTests.allTests),
-        testCase(OutputWireTests.allTests)
-    ]
+enum TestOutputLabel: String, OutputLabel {
+    case output1, output2
 }
-#endif
