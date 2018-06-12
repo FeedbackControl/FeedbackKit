@@ -67,7 +67,7 @@ open class InputWire<W: WireLabel, I: InputLabel>: Wire<W>, InputHandler {
     /// - Returns: Sub input wire.
     open func subwire(withInputLabels inputLabels: [I]) -> InputWire<W, I> {
         let inputLabelRawValues = inputLabels.map { $0.rawValue }
-        let filteredInputs = inputs.filter({ inputLabelRawValues.contains($0.key) })
+        let filteredInputs = inputs.filter { inputLabelRawValues.contains($0.key) }
         let subwire = InputWire<W, I>(label: label, inputs: filteredInputs)
         append(subwire)
         return subwire
