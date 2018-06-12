@@ -1,5 +1,5 @@
 //
-//  LinuxMain.swift
+//  TestInputLabel.swift
 //  FeedbackKitTests
 //
 //  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
@@ -23,14 +23,9 @@
 //  THE SOFTWARE.
 //
 
-import XCTest
-import FeedbackKitTests
+import Foundation
+@testable import FeedbackKit
 
-var tests = [XCTestCaseEntry]()
-tests += BagTests.allTests()
-tests += DisposableTests.allTests()
-tests += OutputPinTests.allTests()
-tests += InputTests.allTests()
-tests += OutputWireTests.allTests()
-tests += InputWireTests.allTests()
-XCTMain(tests)
+enum TestInputLabel: String, InputLabel {
+    case input1, input2
+}
