@@ -48,7 +48,7 @@ open class InputWire<W: WireLabel, I: InputLabel>: Wire<W>, InputHandler {
     /// - Parameters:
     ///   - label: Input label.
     ///   - feedback: Feedback block.
-    open func fabricateInput<T: Value>(label: I, feedback: @escaping (T) -> Void) {
+    open func fabricateInput<T>(label: I, feedback: @escaping (T) -> Void) {
         let input = Input<T>(feedback: feedback)
         inputs[label.rawValue] = input
     }
@@ -57,7 +57,7 @@ open class InputWire<W: WireLabel, I: InputLabel>: Wire<W>, InputHandler {
     ///
     /// - Parameter label: Input label.
     /// - Returns: Input for label.
-    open func input<T: Value>(withLabel label: I) -> Input<T>? {
+    open func input<T>(withLabel label: I) -> Input<T>? {
         return inputs[label.rawValue] as? Input<T>
     }
 

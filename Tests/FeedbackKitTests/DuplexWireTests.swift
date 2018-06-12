@@ -32,10 +32,10 @@ final class DuplexWireTests: XCTestCase {
         let inputWire = DuplexWire<TestWireLabel, TestInputLabel, TestOutputLabel>(label: .wire1)
 
         // Fabricate
-        inputWire.fabricateInput(label: .input1) { (value: AbsoluteSignal<String>) in }
+        inputWire.fabricateInput(label: .input1) { (value: String) in }
 
         // Assert
-        if let retrievedInput: Input<AbsoluteSignal<String>> = inputWire.input(withLabel: .input1) {
+        if let retrievedInput: Input<String> = inputWire.input(withLabel: .input1) {
             XCTAssertNotNil(retrievedInput)
         } else {
             XCTFail("Cannot retrieve output1")
@@ -62,15 +62,15 @@ final class DuplexWireTests: XCTestCase {
         // Fabricate
         _ = duplexWire.fabricateOutput(label: .output1, initialValue: AbsoluteSignal<String>.opened)
         _ = duplexWire.fabricateOutput(label: .output2, initialValue: AbsoluteSignal<String>.opened)
-        duplexWire.fabricateInput(label: .input1) { (value: AbsoluteSignal<String>) in }
-        duplexWire.fabricateInput(label: .input2) { (value: AbsoluteSignal<String>) in }
+        duplexWire.fabricateInput(label: .input1) { (value: String) in }
+        duplexWire.fabricateInput(label: .input2) { (value: String) in }
 
         // Subwire
         let subwire = duplexWire.subwire(withInputLabels: [.input2])
 
         // Assert
-        let input1: Input<AbsoluteSignal<String>>? = subwire.input(withLabel: .input1)
-        let input2: Input<AbsoluteSignal<String>>? = subwire.input(withLabel: .input2)
+        let input1: Input<String>? = subwire.input(withLabel: .input1)
+        let input2: Input<String>? = subwire.input(withLabel: .input2)
         XCTAssertNil(input1)
         XCTAssertNotNil(input2)
     }
@@ -81,8 +81,8 @@ final class DuplexWireTests: XCTestCase {
         // Fabricate
         _ = duplexWire.fabricateOutput(label: .output1, initialValue: AbsoluteSignal<String>.opened)
         _ = duplexWire.fabricateOutput(label: .output2, initialValue: AbsoluteSignal<String>.opened)
-        duplexWire.fabricateInput(label: .input1) { (value: AbsoluteSignal<String>) in }
-        duplexWire.fabricateInput(label: .input2) { (value: AbsoluteSignal<String>) in }
+        duplexWire.fabricateInput(label: .input1) { (value: String) in }
+        duplexWire.fabricateInput(label: .input2) { (value: String) in }
 
         // Subwire
         let subwire = duplexWire.subwire(withOutputLabels: [.output2])
@@ -100,15 +100,15 @@ final class DuplexWireTests: XCTestCase {
         // Fabricate
         _ = duplexWire.fabricateOutput(label: .output1, initialValue: AbsoluteSignal<String>.opened)
         _ = duplexWire.fabricateOutput(label: .output2, initialValue: AbsoluteSignal<String>.opened)
-        duplexWire.fabricateInput(label: .input1) { (value: AbsoluteSignal<String>) in }
-        duplexWire.fabricateInput(label: .input2) { (value: AbsoluteSignal<String>) in }
+        duplexWire.fabricateInput(label: .input1) { (value: String) in }
+        duplexWire.fabricateInput(label: .input2) { (value: String) in }
 
         // Subwire
         let subwire = duplexWire.subwire(inputLabels: [.input1], outputLabels: [.output2])
 
         // Assert
-        let input1: Input<AbsoluteSignal<String>>? = subwire.input(withLabel: .input1)
-        let input2: Input<AbsoluteSignal<String>>? = subwire.input(withLabel: .input2)
+        let input1: Input<String>? = subwire.input(withLabel: .input1)
+        let input2: Input<String>? = subwire.input(withLabel: .input2)
         let output1: Output<AbsoluteSignal<String>>? = subwire.output(withLabel: .output1)
         let output2: Output<AbsoluteSignal<String>>? = subwire.output(withLabel: .output2)
         XCTAssertNotNil(input1)

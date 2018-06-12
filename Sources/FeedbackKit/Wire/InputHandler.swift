@@ -36,13 +36,13 @@ public protocol InputHandler {
     /// - Parameters:
     ///   - label: Input label.
     ///   - feedback: Feedback block.
-    func fabricateInput<T: Value>(label: I, feedback: @escaping (T) -> Void)
+    func fabricateInput<T>(label: I, feedback: @escaping (T) -> Void)
 
     /// Get input for label.
     ///
     /// - Parameter label: Input label.
     /// - Returns: Input for label.
-    func input<T: Value>(withLabel label: I) -> Input<T>?
+    func input<T>(withLabel label: I) -> Input<T>?
 
     /// Return sub input handler.
     ///

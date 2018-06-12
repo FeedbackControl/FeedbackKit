@@ -52,7 +52,7 @@ open class DuplexWire<W: WireLabel, I: InputLabel, O: OutputLabel>: Wire<W>, Inp
     /// - Parameters:
     ///   - label: Input label.
     ///   - feedback: Feedback block.
-    open func fabricateInput<T: Value>(label: I, feedback: @escaping (T) -> Void) {
+    open func fabricateInput<T>(label: I, feedback: @escaping (T) -> Void) {
         let input = Input<T>(feedback: feedback)
         inputs[label.rawValue] = input
     }
@@ -61,7 +61,7 @@ open class DuplexWire<W: WireLabel, I: InputLabel, O: OutputLabel>: Wire<W>, Inp
     ///
     /// - Parameter label: Input label.
     /// - Returns: Input for label.
-    open func input<T: Value>(withLabel label: I) -> Input<T>? {
+    open func input<T>(withLabel label: I) -> Input<T>? {
         return inputs[label.rawValue] as? Input<T>
     }
 

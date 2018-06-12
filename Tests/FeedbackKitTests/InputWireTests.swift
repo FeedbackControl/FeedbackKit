@@ -32,10 +32,10 @@ final class InputWireTests: XCTestCase {
         let inputWire = InputWire<TestWireLabel, TestInputLabel>(label: .wire1)
 
         // Fabricate
-        inputWire.fabricateInput(label: .input1) { (value: AbsoluteSignal<String>) in }
+        inputWire.fabricateInput(label: .input1) { (value: String) in }
 
         // Assert
-        if let retrievedInput: Input<AbsoluteSignal<String>> = inputWire.input(withLabel: .input1) {
+        if let retrievedInput: Input<String> = inputWire.input(withLabel: .input1) {
             XCTAssertNotNil(retrievedInput)
         } else {
             XCTFail("Cannot retrieve output1")
@@ -46,15 +46,15 @@ final class InputWireTests: XCTestCase {
         let inputWire = InputWire<TestWireLabel, TestInputLabel>(label: .wire1)
 
         // Fabricate
-        inputWire.fabricateInput(label: .input1) { (value: AbsoluteSignal<String>) in }
-        inputWire.fabricateInput(label: .input2) { (value: AbsoluteSignal<String>) in }
+        inputWire.fabricateInput(label: .input1) { (value: String) in }
+        inputWire.fabricateInput(label: .input2) { (value: String) in }
 
         // Subwire
         let subwire = inputWire.subwire(withInputLabels: [.input2])
 
         // Assert
-        let input1: Input<AbsoluteSignal<String>>? = subwire.input(withLabel: .input1)
-        let input2: Input<AbsoluteSignal<String>>? = subwire.input(withLabel: .input2)
+        let input1: Input<String>? = subwire.input(withLabel: .input1)
+        let input2: Input<String>? = subwire.input(withLabel: .input2)
         XCTAssertNil(input1)
         XCTAssertNotNil(input2)
     }
@@ -63,8 +63,8 @@ final class InputWireTests: XCTestCase {
         let inputWire = InputWire<TestWireLabel, TestInputLabel>(label: .wire1)
 
         // Fabricate
-        inputWire.fabricateInput(label: .input1) { (value: AbsoluteSignal<String>) in }
-        inputWire.fabricateInput(label: .input2) { (value: AbsoluteSignal<String>) in }
+        inputWire.fabricateInput(label: .input1) { (value: String) in }
+        inputWire.fabricateInput(label: .input2) { (value: String) in }
 
         // Subwire
         var subwire: InputWire<TestWireLabel, TestInputLabel>? = inputWire.subwire(withInputLabels: [.input2])
