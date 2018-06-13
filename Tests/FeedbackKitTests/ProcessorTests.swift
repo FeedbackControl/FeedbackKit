@@ -1,5 +1,5 @@
 //
-//  LinuxMain.swift
+//  ProcessorTests.swift
 //  FeedbackKitTests
 //
 //  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
@@ -24,15 +24,27 @@
 //
 
 import XCTest
-import FeedbackKitTests
+@testable import FeedbackKit
 
-var tests = [XCTestCaseEntry]()
-tests += BagTests.allTests()
-tests += DisposableTests.allTests()
-tests += OutputPinTests.allTests()
-tests += InputTests.allTests()
-tests += OutputWireTests.allTests()
-tests += InputWireTests.allTests()
-tests += DuplexWireTests.allTests()
-tests += ProcessorTests.allTests()
-XCTMain(tests)
+final class ProcessorTests: XCTestCase {
+
+    func testRegisterAndGetWire() {
+        let wire1 = Wire<TestWireLabel>(label: .wire1)
+        let wire2 = Wire<TestWireLabel>(label: .wire2)
+        let processor = Processor<TestWireLabel>()
+
+        // Register wires.
+        processor.register(wire1)
+        processor.register(wire2)
+
+        // Assert
+        XCTAssertNotNil(processor.wire(withLabel: .wire1))
+        XCTAssertNotNil(processor.wire(withLabel: .wire2))
+        XCTAssertEqual(ObjectIdentifier(processor.wire(withLabel: .wire1)!), ObjectIdentifier(wire1))
+        XCTAssertEqual(ObjectIdentifier(processor.wire(withLabel: .wire2)!), ObjectIdentifier(wire2))
+    }
+
+    static let allTests = [
+        ("testRegisterAndGetWire", testRegisterAndGetWire)
+    ]
+}

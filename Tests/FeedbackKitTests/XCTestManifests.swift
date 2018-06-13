@@ -34,7 +34,8 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(InputTests.allTests),
         testCase(OutputWireTests.allTests),
         testCase(InputWireTests.allTests),
-        testCase(DuplexWireTests.allTests)
+        testCase(DuplexWireTests.allTests),
+        testCase(ProcessorTests.allTests)
     ]
 }
 #endif
