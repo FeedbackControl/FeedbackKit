@@ -76,7 +76,7 @@ final class OutputWireTests: XCTestCase {
         subwire = nil
 
         // Assert
-        XCTAssertTrue(outputWire.subwires.allObjects.isEmpty)
+        XCTAssertTrue(outputWire.subwires.isEmpty)
     }
 
     static let allTests = [

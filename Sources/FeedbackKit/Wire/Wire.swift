@@ -29,7 +29,11 @@ import Foundation
 open class Wire<W: WireLabel> {
 
     /// Subwires.
-    open private(set) var subwires = NSHashTable<Wire<W>>.weakObjects()
+    open var subwires: [Wire<W>] {
+        return subwireHashes.allObjects
+    }
+    /// Subwire hash table.
+    private let subwireHashes = NSHashTable<Wire<W>>.weakObjects()
 
     /// Wire label.
     open let label: W
@@ -45,6 +49,7 @@ open class Wire<W: WireLabel> {
     ///
     /// - Parameter subwire: Subwire.
     open func append(_ subwire: Wire<W>) {
-        subwires.add(subwire)
+        subwireHashes.add(subwire)
+    }
     }
 }
