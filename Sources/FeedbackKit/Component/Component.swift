@@ -1,5 +1,5 @@
 //
-//  Wire.swift
+//  Component.swift
 //  FeedbackKit
 //
 //  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
@@ -25,45 +25,11 @@
 
 import Foundation
 
-/// Wire.
-open class Wire<W: WireLabel> {
+/// Component.
+public protocol Component: AnyObject {
 
-    /// Subwires.
-    open var subwires: [Wire<W>] {
-        return subwireHashes.allObjects
-    }
-    /// Components.
-    open var components: [Component] {
-        return componentHashes.allObjects as! [Component]
-    }
-
-    /// Subwire hash table.
-    private let subwireHashes = NSHashTable<Wire<W>>.weakObjects()
-    /// Component hash table.
-    private let componentHashes = NSHashTable<AnyObject>.weakObjects()
-
-    /// Wire label.
-    open let label: W
-
-    /// Initialize wire.
+    /// Connect wire. Define input and output.
     ///
-    /// - Parameter label: Wire label.
-    public init(label: W) {
-        self.label = label
-    }
-
-    /// Append subwire.
-    ///
-    /// - Parameter subwire: Subwire.
-    open func append(_ subwire: Wire<W>) {
-        subwireHashes.add(subwire)
-    }
-
-    /// Connect component and keep the reference.
-    ///
-    /// - Parameter component: Target component.
-    open func connect(_ component: Component) {
-        component.connect(self)
-        componentHashes.add(component)
-    }
+    /// - Parameter wire: Target wire.
+    func connect<W: WireLabel>(_ wire: Wire<W>)
 }
