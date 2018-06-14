@@ -28,6 +28,9 @@ import Foundation
 /// Wire.
 open class Wire<W: WireLabel> {
 
+    /// Processor.
+    open let processor: Processor<W>?
+
     /// Subwires.
     open var subwires: [Wire<W>] {
         return subwireHashes.allObjects
@@ -48,8 +51,9 @@ open class Wire<W: WireLabel> {
     /// Initialize wire.
     ///
     /// - Parameter label: Wire label.
-    public init(label: W) {
+    public init(label: W, processor: Processor<W>? = nil) {
         self.label = label
+        self.processor = processor
     }
 
     /// Append subwire.
@@ -65,5 +69,6 @@ open class Wire<W: WireLabel> {
     open func connect(_ component: Component) {
         component.connect(self)
         componentHashes.add(component)
+        processor?.wire(self, didConnectComponent: component)
     }
 }

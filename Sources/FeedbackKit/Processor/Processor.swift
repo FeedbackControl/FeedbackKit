@@ -26,7 +26,7 @@
 import Foundation
 
 /// Processor.
-open class Processor<W: WireLabel> {
+open class Processor<W: WireLabel>: WireDelegate {
 
     /// Wires.
     private var wires: [String: Wire<W>] = [:]
@@ -44,5 +44,15 @@ open class Processor<W: WireLabel> {
     /// - Returns: Wire with the label.
     open func wire(withLabel label: W) -> Wire<W>? {
         return wires[label.rawValue]
+    }
+
+    /// Wire did connect component.
+    ///
+    /// - Parameters:
+    ///   - wire: Wire.
+    ///   - component: Connected component.
+    open func wire<W: WireLabel>(_ wire: Wire<W>,
+                                 didConnectComponent component: Component) {
+        // Track changes.
     }
 }
