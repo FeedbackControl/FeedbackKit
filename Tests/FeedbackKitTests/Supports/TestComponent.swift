@@ -1,5 +1,5 @@
 //
-//  XCTestManifests.swift
+//  TestComponent.swift
 //  FeedbackKitTests
 //
 //  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
@@ -23,20 +23,14 @@
 //  THE SOFTWARE.
 //
 
-import XCTest
+import Foundation
+@testable import FeedbackKit
 
-#if !os(macOS)
-public func allTests() -> [XCTestCaseEntry] {
-    return [
-        testCase(BagTests.allTests),
-        testCase(DisposableTests.allTests),
-        testCase(OutputPinTests.allTests),
-        testCase(InputTests.allTests),
-        testCase(OutputWireTests.allTests),
-        testCase(InputWireTests.allTests),
-        testCase(DuplexWireTests.allTests),
-        testCase(ProcessorTests.allTests),
-        testCase(ComponentTests.allTests)
-    ]
+final class TestComponent: Component {
+
+    private(set) var connectCalled = false
+
+    func connect<W: WireLabel>(_ wire: Wire<W>) {
+        connectCalled = true
+    }
 }
-#endif

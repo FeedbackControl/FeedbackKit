@@ -1,5 +1,5 @@
 //
-//  XCTestManifests.swift
+//  ComponentTests.swift
 //  FeedbackKitTests
 //
 //  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
@@ -24,19 +24,41 @@
 //
 
 import XCTest
+@testable import FeedbackKit
 
-#if !os(macOS)
-public func allTests() -> [XCTestCaseEntry] {
-    return [
-        testCase(BagTests.allTests),
-        testCase(DisposableTests.allTests),
-        testCase(OutputPinTests.allTests),
-        testCase(InputTests.allTests),
-        testCase(OutputWireTests.allTests),
-        testCase(InputWireTests.allTests),
-        testCase(DuplexWireTests.allTests),
-        testCase(ProcessorTests.allTests),
-        testCase(ComponentTests.allTests)
+final class ComponentTests: XCTestCase {
+
+    func testConnectComponents() {
+        let wire = Wire<TestWireLabel>(label: .wire1)
+        let component1 = TestComponent()
+        let component2 = TestComponent()
+
+        // Connect
+        wire.connect(component1)
+        wire.connect(component2)
+
+        // Assert
+        XCTAssertEqual(wire.components.count, 2)
+        XCTAssertTrue(component1.connectCalled)
+        XCTAssertTrue(component2.connectCalled)
+    }
+
+    func testReleaseComponent() {
+        let wire = Wire<TestWireLabel>(label: .wire1)
+        var component1: Component! = TestComponent()
+
+        // Connect
+        wire.connect(component1)
+
+        // Release
+        component1 = nil
+
+        // Assert
+        XCTAssertTrue(wire.components.isEmpty)
+    }
+
+    static let allTests = [
+        ("testConnectComponents", testConnectComponents),
+        ("testReleaseComponent", testReleaseComponent)
     ]
 }
-#endif
