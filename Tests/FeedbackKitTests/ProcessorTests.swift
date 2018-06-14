@@ -33,7 +33,7 @@ final class ProcessorTests: XCTestCase {
         let wire2 = Wire<TestWireLabel>(label: .wire2)
         let processor = Processor<TestWireLabel>()
 
-        // Register wires.
+        // Register wires
         processor.register(wire1)
         processor.register(wire2)
 
@@ -44,7 +44,23 @@ final class ProcessorTests: XCTestCase {
         XCTAssertEqual(ObjectIdentifier(processor.wire(withLabel: .wire2)!), ObjectIdentifier(wire2))
     }
 
+    func testDidConnectComponentCalled() {
+        let processor = TestProcessor()
+        let wire1 = Wire<TestWireLabel>(label: .wire1, processor: processor)
+        let component = TestComponent()
+
+        // Fabricate
+        processor.register(wire1)
+
+        // Connect component
+        wire1.connect(component)
+
+        // Assert
+        XCTAssertTrue(processor.didConnectComponentCalled)
+    }
+
     static let allTests = [
-        ("testRegisterAndGetWire", testRegisterAndGetWire)
+        ("testRegisterAndGetWire", testRegisterAndGetWire),
+        ("testDidConnectComponentCalled", testDidConnectComponentCalled)
     ]
 }
