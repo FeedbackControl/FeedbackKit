@@ -55,4 +55,6 @@ open class Processor<W: WireLabel>: WireDelegate {
                                  didConnectComponent component: Component) {
         // Track changes.
     }
+
+    public init() {}
 }
