@@ -29,7 +29,7 @@ import Foundation
 open class Wire<W: WireLabel> {
 
     /// Processor.
-    open let processor: Processor<W>?
+    public let processor: Processor<W>?
 
     /// Subwires.
     open var subwires: [Wire<W>] {
@@ -46,7 +46,7 @@ open class Wire<W: WireLabel> {
     private let componentHashes = NSHashTable<AnyObject>.weakObjects()
 
     /// Wire label.
-    open let label: W
+    public let label: W
 
     /// Initialize wire.
     ///
