@@ -115,7 +115,7 @@ open class DuplexWire<W: WireLabel, I: InputLabel, O: OutputLabel>: Wire<W>, Inp
     ///   - inputLabels: Input labels sub wire have.
     ///   - outputLabels: Output labels sub wire have.
     /// - Returns: Sub duplex wire.
-    open func subwire(inputLabels: [I], outputLabels: [O]) -> DuplexWire<W, I, O> {
+    open func subwire(inputLabels: [I] = [], outputLabels: [O] = []) -> DuplexWire<W, I, O> {
         let inputLabelRawValues = inputLabels.map { $0.rawValue }
         let filteredInputs = inputs.filter { inputLabelRawValues.contains($0.key) }
         let outputLabelRawValues = outputLabels.map { $0.rawValue }
