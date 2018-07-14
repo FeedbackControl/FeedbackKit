@@ -29,12 +29,14 @@ import Foundation
 /// Useful for api response or sub process.
 ///
 /// - opened: Signal opened.
+/// - started: Task started.
 /// - updated: Data updated.
 /// - error: Error occurred.
 /// - canceled: Signal canceled.
 /// - closed: Signal closed.
 public enum ResponseSignal<T, E: Error>: Value {
     case opened
+    case started
     case updated(T)
     case error(E)
     case canceled(E)
