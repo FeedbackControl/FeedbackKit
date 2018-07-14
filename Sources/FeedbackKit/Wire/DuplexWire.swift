@@ -31,9 +31,9 @@ open class DuplexWire<W: WireLabel, I: InputLabel, O: OutputLabel>: Wire<W>, Inp
     public typealias OH = OutputWire<W, O>
 
     /// Inputs.
-    private var inputs: [String: Any] = [:]
+    public private(set) var inputs: [String: Any] = [:]
     /// Outputs.
-    private var outputs: [String: Any] = [:]
+    public private(set) var outputs: [String: Any] = [:]
 
     /// Initialize input wire.
     ///

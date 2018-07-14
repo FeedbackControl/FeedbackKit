@@ -31,7 +31,7 @@ open class InputWire<W: WireLabel, I: InputLabel>: Wire<W>, InputHandler {
     public typealias IH = InputWire<W, I>
 
     /// Inputs.
-    private var inputs: [String: Any] = [:]
+    public private(set) var inputs: [String: Any] = [:]
 
     /// Initialize input wire.
     ///

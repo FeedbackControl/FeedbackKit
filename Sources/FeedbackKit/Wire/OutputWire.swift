@@ -31,7 +31,7 @@ open class OutputWire<W: WireLabel, O: OutputLabel>: Wire<W>, OutputHandler {
     public typealias OH = OutputWire<W, O>
 
     /// Outputs.
-    private var outputs: [String: Any] = [:]
+    public private(set) var outputs: [String: Any] = [:]
 
     /// Initialize output wire.
     ///
