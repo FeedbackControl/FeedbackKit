@@ -30,15 +30,15 @@ import Foundation
 ///
 /// - opened: Signal opened.
 /// - started: Task started.
-/// - updated: Data updated.
+/// - fetched: Data fetched.
 /// - error: Error occurred.
 /// - canceled: Signal canceled.
 /// - closed: Signal closed.
 public enum ResponseSignal<T, E: Error>: Value {
     case opened
     case started
-    case updated(T)
+    case fetched(T)
     case error(E)
-    case canceled(E)
+    case canceled
     case closed
 }
