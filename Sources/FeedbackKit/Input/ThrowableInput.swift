@@ -1,5 +1,5 @@
 //
-//  InputHandler.swift
+//  ThrowableInput.swift
 //  FeedbackKit
 //
 //  Copyright (c) 2018 Jason Nam (https://jasonnam.com)
@@ -25,41 +25,24 @@
 
 import Foundation
 
-/// Input handler.
-public protocol InputHandler {
+/// Throwable input stream.
+open class ThrowableInput<T> {
 
-    associatedtype IH: InputHandler
-    associatedtype I: InputLabel
+    /// Feedback block.
+    private let feedback: (T) throws -> Void
 
-    /// Fabricate input.
+    /// Initialize input pin.
     ///
-    /// - Parameters:
-    ///   - label: Input label.
-    ///   - feedback: Feedback block.
-    func fabricateInput<T>(label: I, feedback: @escaping (T) -> Void)
+    /// - Parameter feedback: Feedback block.
+    public init(feedback: @escaping (T) throws -> Void) {
+        self.feedback = feedback
+    }
 
-    /// Fabricate throwable input.
+    /// Trigger input.
     ///
-    /// - Parameters:
-    ///   - label: Input label.
-    ///   - feedback: Feedback block.
-    func fabricateInput<T>(label: I, feedback: @escaping (T) throws -> Void)
-
-    /// Get input for label.
-    ///
-    /// - Parameter label: Input label.
-    /// - Returns: Input for label.
-    func input<T>(withLabel label: I) -> Input<T>?
-
-    /// Get throwable input for label.
-    ///
-    /// - Parameter label: Input label.
-    /// - Returns: Throwable input for label.
-    func input<T>(withLabel label: I) -> ThrowableInput<T>?
-
-    /// Return sub input handler.
-    ///
-    /// - Parameter inputLabels: Input labels sub input handler have.
-    /// - Returns: Sub input handler.
-    func subwire(withInputLabels inputLabels: [I]) -> IH
+    /// - Parameter input: Input value.
+    /// - Throws: Can throw trigger error.
+    open func trigger(_ input: T) throws {
+        try feedback(input)
+    }
 }

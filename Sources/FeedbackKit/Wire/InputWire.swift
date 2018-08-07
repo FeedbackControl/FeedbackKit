@@ -53,12 +53,30 @@ open class InputWire<W: WireLabel, I: InputLabel>: Wire<W>, InputHandler {
         inputs[label.rawValue] = input
     }
 
+    /// Fabricate throwable input.
+    ///
+    /// - Parameters:
+    ///   - label: Input label.
+    ///   - feedback: Feedback block.
+    open func fabricateInput<T>(label: I, feedback: @escaping (T) throws -> Void) {
+        let input = ThrowableInput<T>(feedback: feedback)
+        inputs[label.rawValue] = input
+    }
+
     /// Get input for label.
     ///
     /// - Parameter label: Input label.
     /// - Returns: Input for label.
     open func input<T>(withLabel label: I) -> Input<T>? {
         return inputs[label.rawValue] as? Input<T>
+    }
+
+    /// Get throwable input for label.
+    ///
+    /// - Parameter label: Input label.
+    /// - Returns: Throwable Input for label.
+    open func input<T>(withLabel label: I) -> ThrowableInput<T>? {
+        return inputs[label.rawValue] as? ThrowableInput<T>
     }
 
     /// Return sub input wire.
