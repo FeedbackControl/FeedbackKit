@@ -26,8 +26,11 @@
 import Foundation
 
 /// Value signal. Output stream with only value.
-///
-/// - updated: Data updated.
-public enum ValueSignal<T>: Value {
-    case updated(T)
+open class ValueSignal<T>: Value {
+
+    public let value: T
+
+    public init(_ value: T) {
+        self.value = value
+    }
 }
